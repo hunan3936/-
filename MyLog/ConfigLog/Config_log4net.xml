@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<log4net debug="true">
+  <root name="logdb">
+    <level value="ALL"/>
+    <!--====控制台控制显示日志====-->
+    <!--<appender-ref ref="AdoNetAppender" />
+    <appender-ref ref="RollingLogFileAppender" />-->
+  </root>
+  
+  <logger name="LogToFile">
+    <level value="ALL" />
+    <appender-ref ref="RollingLogFileAppender" />
+  </logger>
+
+  <logger name="LogToDatabase">
+    <level value="ALL" />
+    <appender-ref ref="AdoNetAppender" />
+  </logger>
+  
+  <appender name="AdoNetAppender" type="log4net.Appender.AdoNetAppender">
+    <bufferSize value="1" />
+    <connectionType value="System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <connectionString value="server=.;database=lnhoo_MonitorPlatform;UID=sa;PWD=hunan393653149" />
+    <!--<commandText value="INSERT INTO Log ([Date],[Thread],[Level],[Logger],[Message],[Exception],[Value],[IsOK],[BeginTime],
+                 [EndTime],[FunDescription],[InParams],[OutDataSeriale]) 
+                 VALUES (@log_date, @thread, @log_level, @logger, @message, @exception,@Value,@IsOK,@BeginTime,@EndTime,@FunDescription,
+                 @InParams,@OutDataSeriale)" />-->
+    <commandText value="INSERT INTO Log_Test ([Date],[Level],[Logger],[Exception],[URL],[MethodName],[RequestStr],
+                 [ResponseStr]) 
+                 VALUES (@log_date, @log_level, @logger,  @exception,@URL,@MethodName,@RequestStr,@ResponseStr
+                 )" />
+    <parameter>
+      <parameterName value="@log_date" />
+      <dbType value="DateTime" />
+      <layout type="log4net.Layout.RawTimeStampLayout" />
+    </parameter>
+    <!--<parameter>
+      <parameterName value="@thread" />
+      <dbType value="String" />
+      <size value="255" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%thread" />
+      </layout>
+    </parameter>-->
+    <parameter>
+      <parameterName value="@log_level" />
+      <dbType value="String" />
+      <size value="50" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%level" />
+      </layout>
+    </parameter>
+    <parameter>
+      <parameterName value="@logger" />
+      <dbType value="String" />
+      <size value="255" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%logger" />
+      </layout>
+    </parameter>
+    <!--<parameter>
+      <parameterName value="@message" />
+      <dbType value="String" />
+      <size value="4000" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%message" />
+      </layout>
+    </parameter>-->
+    <!--<parameter>
+      <parameterName value="@message" />
+      <dbType value="String" />
+      <size value="4000" />
+      <layout type="ClassLibrary123.MyLayout">
+        <conversionPattern value="%property{Msg}" />
+      </layout>
+    </parameter>-->
+    <parameter>
+      <parameterName value="@exception" />
+      <dbType value="String" />
+      <size value="2000" />
+      <layout type="log4net.Layout.ExceptionLayout" />
+    </parameter>
+    <parameter>
+      <parameterName value="@URL" />
+      <dbType value="String" />
+      <size value="500" />
+      <layout type="SelfLog4net.MyLayout">
+        <conversionPattern value="%property{URL}" />
+      </layout>
+    </parameter>
+    <parameter>
+      <parameterName value="@MethodName" />
+      <dbType value="String" />
+      <size value="500" />
+      <layout type="SelfLog4net.MyLayout">
+        <conversionPattern value="%property{MethodName}" />
+      </layout>
+    </parameter>
+    
+    <parameter>
+      <parameterName value="@RequestStr" />
+      <dbType value="String" />
+      <size value="-1" />
+      <layout type="SelfLog4net.MyLayout">
+        <conversionPattern value="%property{RequestStr}" />
+      </layout>
+    </parameter>
+
+    <parameter>
+      <parameterName value="@ResponseStr" />
+      <dbType value="String" />
+      <size value="-1" />
+      <layout type="SelfLog4net.MyLayout">
+        <conversionPattern value="%property{ResponseStr}" />
+      </layout>
+    </parameter>
+    
+    
+    <!--<parameter>
+      <parameterName value="@IsOK" />
+      <dbType value="String" />
+      <size value="50" />
+      <layout type="ClassLibrary123.MyLayout">
+        <conversionPattern value="%property{IsOK}" />
+      </layout>
+    </parameter>
+
+    <parameter>
+      <parameterName value="@BeginTime" />
+      <dbType value="String" />
+      <size value="500" />
+      <layout type="ClassLibrary123.MyLayout">
+        <conversionPattern value="%property{BeginTime}" />
+      </layout>
+    </parameter>
+    <parameter>
+      <parameterName value="@EndTime" />
+      <dbType value="String" />
+      <size value="500" />
+      <layout type="ClassLibrary123.MyLayout">
+        <conversionPattern value="%property{EndTime}" />
+      </layout>
+    </parameter>
+    <parameter>
+      <parameterName value="@FunDescription" />
+      <dbType value="String" />
+      <size value="500" />
+      <layout type="ClassLibrary123.MyLayout">
+        <conversionPattern value="%property{FunDescription}" />
+      </layout>
+    </parameter>
+    <parameter>
+      <parameterName value="@InParams" />
+      <dbType value="String" />
+      <size value="-1" />
+      <layout type="ClassLibrary123.MyLayout">
+        <conversionPattern value="%property{InParams}" />
+      </layout>
+    </parameter>
+    <parameter>
+      <parameterName value="@OutDataSeriale" />
+      <dbType value="String" />
+      <size value="-1" />
+      <layout type="ClassLibrary123.MyLayout">
+        <conversionPattern value="%property{OutDataSeriale}" />
+      </layout>
+    </parameter>-->
+  </appender>
+  <appender name="RollingLogFileAppender" type="log4net.Appender.RollingFileAppender">
+          <!--定义文件存放位置-->
+           <file value="log\\"/>
+           <appendToFile value="true"/>
+           <rollingStyle value="Composite"/>
+           <countDirection value="1" />
+           <datePattern value="yyyy-MM-dd-HH'.txt'"/>
+           <staticLogFileName value="false"/>
+           <!--是否保存文件的扩展名字-->
+           <preserveLogFileNameExtension value="true" />
+           <param name="MaxSizeRollBackups" value="10"/>
+           <param name="MaximumFileSize" value="2MB"/>
+           <layout type="MyLog.MyLayout">
+      <!-- ConversionPattern 解释
+%m(message):输出的日志消息，如ILog.Debug(…)输出的一条消息
+%n(new line)：換行
+%d(datetime):输出当前语句运行的时刻 
+%r(run time):输出程序从运行到执行到当前语句时消耗的毫秒数 
+%t(thread id):当前语句所在的线程ID
+%p(priority): 日志的当前优先级别，即DEBUG、INFO、WARN…等
+%c(class):当前日志对象的名称
+%L：输出语句所在的行号
+%F：输出语句所在的文件名
+%-数字：表示该项的最小长度，如果不够，则用空格填充
+-->
+      <!--每条日志末尾的文字说明-->
+      <!--输出格式-->
+      <!--样例：2008-03-26 13:42:32,111 [10] INFO  Log4NetDemo.MainClass [(null)] - info-->
+      <!--<conversionPattern value="%newline %n记录时间：%date %n线程ID:[%thread] %n日志级别：  %-5level %n出错类：%logger property: [%property{NDC}] - %n行号:%L  %n文件名:%F %n消耗的毫秒数:%r%n错误描述：%message %nURL：%property{URL} %n方法名：%property{MethodName} %n请求参数：%property{RequestStr}%n返回参数：%property{ResponseStr} 路径：%location 方法名：%M %newline %n"/>-->
+             <conversionPattern value="%newline %n记录时间：%date  %n消耗的毫秒数: %r%n返回消息：%property{msg} %n返回结果：%property{isOk} %n方法名：%property{funName}  %n请求地址：%property{IPAddress} %n平台地址：%property{url}%n请求参数：%property{inputStr}%n返回参数：%property{outputStr} %n开始时间：%property{startTime} %n结束时间：%property{endTime} %newline %n"/>
+    </layout>           
+    
+           <!--原始文件-->
+           <!--<layout type="log4net.Layout.PatternLayout">
+             <conversionPattern value="%newline %n记录时间：%date %n线程ID:[%thread] %n日志级别：  %-5level %n出错类：%logger property: [%property{NDC}] - %n行号:%L  %n文件名:%F %n消耗的毫秒数:%r %n错误描述：%message%newline %n"/>
+          </layout>-->
+  </appender>
+  
+  <appender name="ConsoleAppender" type="log4net.Appender.ConsoleAppender">
+    <layout type="log4net.Layout.PatternLayout">
+      <conversionPattern value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
+    </layout>
+  </appender>
+
+</log4net>

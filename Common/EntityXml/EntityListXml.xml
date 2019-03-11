@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+
+  <Item>
+    <Name>TCM_HIS_01</Name>
+    <!--该交易直接存数据库Url为空，Connecting配置连接串-->
+    <Url>http://cas.sinosoft.com.cn:30002/services/TCM_HIS_01</Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode>Agent</WebAccessMode>
+    <FunName>acceptMessage</FunName>
+    <Connecting></Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType></DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_02</Name>
+    <!--该交易直接存数据库Url为空，Connecting配置连接串-->
+    <Url>http://cas.sinosoft.com.cn:30007/services/TCM_HIS_02</Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode>Agent</WebAccessMode>
+    <FunName>acceptMessage</FunName>
+    <Connecting></Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType></DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_03</Name>
+    <!--该交易直接存数据库Url为空，Connecting配置连接串-->
+    <Url>http://cas.sinosoft.com.cn:30010/services/TCM_HIS_03</Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode>Agent</WebAccessMode>
+    <FunName>acceptMessage</FunName>
+    <Connecting></Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType></DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_04</Name>
+    <!--该交易直接存数据库Url为空，Connecting配置连接串-->
+    <Url>http://cas.sinosoft.com.cn:30005/services/TCM_HIS_04</Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode>Agent</WebAccessMode>
+    <FunName>acceptMessage</FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=tcmdc; Password=tcm123456;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Handle>true</Handle>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_05</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_06</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_07</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_08</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_09</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_15</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_16</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_21</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_HIS_22</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>CFData_ZJ</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>GetZYGData</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <!--是否格式化输出 1：表格式化输出成功与失败的结果返回XML通过<Result><code>{0}</code><desc>{1}</desc>{2}</Result>格式化，否则成功就输出<Data></Data>-->
+    <OutputFormat></OutputFormat>
+    <!--这个是HIS获取的方法没有最新版本一说-->
+    <Version></Version>
+  </Item>
+  <Item>
+    <Name>TCM_P_01</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+  <Item>
+    <Name>TCM_P_02</Name>
+    <Url></Url>
+    <ClassName></ClassName>
+    <!--Web访问方式:HttpWeb,Agent,WebRefer-->
+    <WebAccessMode></WebAccessMode>
+    <FunName></FunName>
+    <Connecting>Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=zygjk; Password=zygjk;</Connecting>
+    <!--SQLService,MySQLDB ,OracleDB-->
+    <DbType>OracleDB</DbType>
+    <Version>1.2</Version>
+  </Item>
+</Root>
