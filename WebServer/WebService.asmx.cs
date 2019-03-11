@@ -21,7 +21,7 @@ namespace WebServer
     {
 
         private static MyLog.MyLog log = new MyLog.MyLog();
-        [WebMethod(MessageName = "中医医术确有专长人员表格信息Xml")]
+        [WebMethod(Description = "医护人员信息上传")]
         public string UploadDoctorInfo(string inParam)
         {
             ReturnValue frv = new ReturnValue();

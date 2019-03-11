@@ -152,8 +152,8 @@ namespace Controller
             {
                 DoctorInfo doctorInfo = new DoctorInfo();
                 #region  DoctorInfo  信息
-                doctorInfo.DoctorID = GetXmlString(node.SelectSingleNode("DoctorID"), "【DoctorID】");
-                doctorInfo.AccessID = GetXmlString(node.SelectSingleNode("AccessID"), "【AccessID】");
+                doctorInfo.DoctorID = GetXmlString(node.SelectSingleNode("DoctorID"), "【DoctorID】",true);
+                doctorInfo.AccessID = GetXmlString(node.SelectSingleNode("AccessID"), "【AccessID】",true);
                 doctorInfo.OrgID = GetXmlString(node.SelectSingleNode("OrgID"), "【OrgID】");
                 doctorInfo.DoctorName = GetXmlString(node.SelectSingleNode("DoctorName"), "【DoctorName】");
                 doctorInfo.IDCardNo = GetXmlString(node.SelectSingleNode("IDCardNo"), "【IDCardNo】");
@@ -214,7 +214,7 @@ namespace Controller
                 {
                     SpecialityInfo info = new SpecialityInfo();
                     #region
-                    info.DoctorID = GetXmlString(node.SelectSingleNode("DoctorID"), "【DoctorID】");
+                    info.DoctorID = GetXmlString(node.SelectSingleNode("DoctorID"), "【DoctorID】",true);
                     info.StudyAddress = GetXmlString(node.SelectSingleNode("StudyAddress"), "【StudyAddress】");
                     info.StudyStartTime = GetXmlDateTime(node.SelectSingleNode("StudyStartTime"), "【StudyStartTime】");
                     info.StudyEndTime = GetXmlDateTime(node.SelectSingleNode("StudyEndTime"), "【StudyEndTime】");
@@ -228,16 +228,32 @@ namespace Controller
                 }
             }
         }
-
-        private string GetXmlString(XmlNode node, string msg = "", bool flag = true)
+        /// <summary>
+        /// XML字符串获取，并验证节点是否存在且不为控制
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="msg"></param>
+        /// <param name="flag">true验证数据</param>
+        /// <returns></returns>
+        private string GetXmlString(XmlNode node, string msg = "", bool flag = false)
         {
             if (node != null)
+            {
+                if(flag && string.IsNullOrEmpty(node.InnerText))
+                    throw new Exception(msg + "节点为空！");
                 return node.InnerText;
+            }
             if (flag)
                 throw new Exception(msg + "节点不存在！");
             return string.Empty;
         }
-
+        /// <summary>
+        /// XML日期字段获取，并验证节点是否存在且合法验证
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="msg"></param>
+        /// <param name="flag">true验证数据</param>
+        /// <returns></returns>
         private DateTime? GetXmlDateTime(XmlNode node, string msg = "", bool flag = false)
         {
             DateTime dt = DateTime.Now;
@@ -249,10 +265,14 @@ namespace Controller
                 throw new Exception(str);
             }
             return null;
-            //return new System.Data.SqlTypes.SqlDateTime().Value;
-            //return new DateTime();
         }
-
+        /// <summary>
+        ///  XML整数获取，并验证节点是否存在且合法验
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="msg"></param>
+        /// <param name="flag">true验证数据</param>
+        /// <returns></returns>
         private int GetXmlInt(XmlNode node, string msg = "", bool flag = false)
         {
             int ret =  int.MinValue; 
@@ -266,7 +286,13 @@ namespace Controller
             return ret;
         }
 
-
+        /// <summary>
+        /// XML节点列表验证
+        /// </summary>
+        /// <param name="nodeList"></param>
+        /// <param name="msg"></param>
+        /// <param name="flag"></param>
+        /// <returns></returns>
         private bool ValidNodeList(XmlNodeList nodeList,string msg ="", bool flag = true)
         {
             if (nodeList != null && nodeList.Count >0)
