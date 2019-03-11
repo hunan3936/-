@@ -76,6 +76,10 @@
       <Project>{CFFE1E8A-C69D-4A15-BFE4-F27624D8321D}</Project>
       <Name>DataAccessDll</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mode\Mode.csproj">
+      <Project>{e77dde07-b06d-46a2-a1ae-b34f78b14790}</Project>
+      <Name>Mode</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="System\" />

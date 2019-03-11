@@ -50,6 +50,7 @@
     <Compile Include="ReturnValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysEntity.cs" />
+    <Compile Include="XMLConvert.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="EntityXml\EntityListXml.xml">

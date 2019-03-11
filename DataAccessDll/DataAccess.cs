@@ -32,7 +32,7 @@ namespace DataAccessDll
         /// </summary>
         public static DBType dBType { get { return _dBType; } set { _dBType = value; } }
 
-        public int ExecuteSql(string sqlStr, object param, bool flag = false)
+        public int ExecuteSqlTran(string sqlStr, object param, bool flag = false)
         {
             int ret = -1;
             if (!string.IsNullOrEmpty(sqlStr))
@@ -135,6 +135,27 @@ namespace DataAccessDll
             {
                 return idbCon.QuerySingle<T>(sqlStr, param);
             }
+        }
+
+        public List<T> GetListObject<T>(string sqlStr, object param)
+        {
+            using (IDbConnection idbCon = new SqlConnection(Connecting))
+            {
+                return idbCon.Query<T>(sqlStr,param).ToList();
+                //return idbCon.Query<T>(sqlStr, param).ToList<T>();
+                //return idbCon.Query<T>(sqlStr, param).AsList<T>();
+                //return SqlMapper.Query<T>(idbCon, sqlStr, param).ToList<T>();
+
+            }
+        }
+        public int ExecuteSql(string strSql, object param)
+        {
+            int ret = -1;
+            using (IDbConnection idbCon = new SqlConnection(Connecting))
+            {
+                ret = idbCon.Execute(strSql, param);
+            }
+            return ret;
         }
     }
 

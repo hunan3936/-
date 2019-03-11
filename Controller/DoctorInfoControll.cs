@@ -63,7 +63,7 @@ namespace Controller
             if (DataAccess.dBType == DBType.OracleDB)
             {
                 DoctorInfoSql = @"insert into  DoctorInfo(
-                       DoctorID,AccessID,OrgID,IDCardNo,Birthday,Sex,Mobile,Phone,Email,
+                       DoctorID,AccessID,OrgID,IDCardNo,DoctorName,Birthday,Sex,Mobile,Phone,Email,
                        Postcode,DoctorType,DoctorTitle,DoctorProfile,Photo,MZ,CensusProvince,
                        CensusCity,CensusCounty,CensusStreet,CensusDetailAddress,CurrentProvince,
                        CurrentCity,CurrentCounty,CurrentStreet,CurrentDetailAddress,MaritalStatus,
@@ -71,7 +71,7 @@ namespace Controller
                        DataSrc,PYM,WBM,Status,IsValid,CreaterID,CreaterName,CreaterTime,ModifierID,ModifierName,
                        ModifyTime,DeleterID,DeleterName,DeleterTime,Remarks 
                        ) values(
-                       :DoctorID,:AccessID,:OrgID,:IDCardNo,:Birthday,:Sex,:Mobile,:Phone,:Email,
+                       :DoctorID,:AccessID,:OrgID,:IDCardNo,:DoctorName,:Birthday,:Sex,:Mobile,:Phone,:Email,
                        :Postcode,:DoctorType,:DoctorTitle,:DoctorProfile,:Photo,:MZ,:CensusProvince,
                        :CensusCity,:CensusCounty,:CensusStreet,:CensusDetailAddress,:CurrentProvince,
                        :CurrentCity,:CurrentCounty,:CurrentStreet,:CurrentDetailAddress,:MaritalStatus,
@@ -91,7 +91,7 @@ namespace Controller
             {
 
                 DoctorInfoSql = @"insert into  DoctorInfo(
-                       DoctorID,AccessID,OrgID,IDCardNo,Birthday,Sex,Mobile,Phone,Email,
+                       DoctorID,AccessID,OrgID,IDCardNo,DoctorName,Birthday,Sex,Mobile,Phone,Email,
                        Postcode,DoctorType,DoctorTitle,DoctorProfile,Photo,MZ,CensusProvince,
                        CensusCity,CensusCounty,CensusStreet,CensusDetailAddress,CurrentProvince,
                        CurrentCity,CurrentCounty,CurrentStreet,CurrentDetailAddress,MaritalStatus,
@@ -99,7 +99,7 @@ namespace Controller
                        DataSrc,PYM,WBM,Status,IsValid,CreaterID,CreaterName,CreaterTime,ModifierID,ModifierName,
                        ModifyTime,DeleterID,DeleterName,DeleterTime,Remarks 
                        ) values(
-                       @DoctorID,@AccessID,@OrgID,@IDCardNo,@Birthday,@Sex,@Mobile,@Phone,@Email,
+                       @DoctorID,@AccessID,@OrgID,@IDCardNo,@DoctorName,@Birthday,@Sex,@Mobile,@Phone,@Email,
                        @Postcode,@DoctorType,@DoctorTitle,@DoctorProfile,@Photo,@MZ,@CensusProvince,
                        @CensusCity,@CensusCounty,@CensusStreet,@CensusDetailAddress,@CurrentProvince,
                        @CurrentCity,@CurrentCounty,@CurrentStreet,@CurrentDetailAddress,@MaritalStatus,
@@ -124,17 +124,17 @@ namespace Controller
                 {
                     foreach (DoctorInfo info in doctorInfos)
                     {
-                        int ret = da.ExecuteSql(DoctorInfoSql, info);
+                        int ret = da.ExecuteSqlTran(DoctorInfoSql, info);
                         if (ret < 0)
                             throw new Exception();
                         if (info.SpecialList != null && info.SpecialList.Count > 0)
                         {
-                            ret = da.ExecuteSql(SpecialityInfoSql, info.SpecialList);
+                            ret = da.ExecuteSqlTran(SpecialityInfoSql, info.SpecialList);
                             if (ret < 0)
                                 throw new Exception();
                         }
                     }
-                    da.ExecuteSql("", null, true);  //提交事务
+                    da.ExecuteSqlTran("", null, true);  //提交事务
                 }
             }
             catch (Exception ex)
