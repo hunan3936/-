@@ -41,6 +41,8 @@ namespace Common
         #endregion
 
 
+
+
         #region  序列化
         /// <summary>
         /// XML字符串序列化为对象
@@ -55,7 +57,6 @@ namespace Common
                 return null;
             var xmldoc = new XmlDocument();
             xmldoc.LoadXml(xml);
-            XmlNode node01 = GetXmlNode(xmldoc.FirstChild, t.Name);
             XmlNode node = null;
             for (int i = 0; i < xmldoc.ChildNodes.Count; i++)
             {
@@ -66,23 +67,6 @@ namespace Common
                 }
             }
             return NodeToObj(node, t);
-        }
-
-        public static XmlNode GetXmlNode(XmlNode node, string name)
-        {
-            if (node.NodeType == XmlNodeType.Element && node.Name == name)
-                return node;
-            else 
-            {  
-                XmlNodeList nodeList = node.ChildNodes;
-                foreach (XmlNode subNode in nodeList)
-                {
-                    if (subNode.NodeType == XmlNodeType.Element && subNode.HasChildNodes)
-                        return GetXmlNode(subNode, name);
-                }
-                return null;
-            }
-                
         }
         /// <summary>
         /// XML字符串序列化为对象
