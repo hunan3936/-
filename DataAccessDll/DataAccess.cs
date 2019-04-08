@@ -2,16 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Dapper;
 using System.Data;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using Oracle.ManagedDataAccess.Client;
 using System.Configuration;
-
+using Dapper;
 namespace DataAccessDll
 {
+
     public class DataAccess
     {
        static  DataAccess()
@@ -21,6 +20,9 @@ namespace DataAccessDll
             //dBType =  !string.IsNullOrEmpty(ProviderName) ? (DBType)Enum.Parse(typeof(DBType), ProviderName) : DBType.OracleDB;
             if (!Enum.TryParse(ProviderName, out _dBType))
                 dBType = DBType.OracleDB;
+            //用于测试
+            //Connecting = "Data Source =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.40.15)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User Id=tcmdc; Password=tcm123456;";
+
         }
         /// <summary>
         /// 数据库连接字符串
@@ -49,6 +51,12 @@ namespace DataAccessDll
                 CloseObject();
             }
             return ret;
+        }
+
+
+        public object ExecuteScalarTran(string sqlStr, object param)
+        {
+            return ConTran.ExecuteScalar(sqlStr, param, Tran);
         }
 
         private void OpenDB(IDbConnection Con)
@@ -137,7 +145,7 @@ namespace DataAccessDll
             }
         }
 
-        public List<T> GetListObject<T>(string sqlStr, object param)
+        public List<T> GetListObject<T>(string sqlStr, object param = null)
         {
             using (IDbConnection idbCon = new SqlConnection(Connecting))
             {
@@ -154,9 +162,21 @@ namespace DataAccessDll
             using (IDbConnection idbCon = new SqlConnection(Connecting))
             {
                 ret = idbCon.Execute(strSql, param);
+                //idbCon.ExecuteScalar
             }
             return ret;
         }
+
+        public object ExecuteScalar(string sqlStr, object param)
+        {
+            object obj = null;
+            using (IDbConnection idbCon = new SqlConnection(Connecting))
+            {
+                obj = idbCon.ExecuteScalar(sqlStr, param);
+            }
+            return obj;
+        }
+
     }
 
 

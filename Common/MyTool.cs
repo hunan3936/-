@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Common
 {
@@ -200,6 +201,11 @@ namespace Common
 
             }
             return dt.ToString("yyyyMMddHHmmssfff") + randomStr + suffix;
+        }
+
+        public static string ObjToJson(object obj)
+        {
+            return JsonConvert.SerializeObject(obj);
         }
     }
 }

@@ -200,6 +200,23 @@ namespace Mode
         /// 备注
         /// </summary>
         public string Remarks { get; set; }
+        /// <summary>
+        /// OrgName 机构名称    s[50]
+        /// </summary>
+        public string OrgName { get; set; }
+        /// <summary>
+        /// DepName 科室名称 s[50]
+        /// </summary>
+        public string DepName { get; set; }
+        /// <summary>
+        /// DepCode 科室编码    s[50]
+        /// </summary>
+        public string DepCode { get; set; }
+        /// <summary>
+        /// 考生是否通过标记  s[20]
+        /// </summary>
+        public string ValidateFlag { get; set; }
+
 
         private List<SpecialityInfo> _SpecialList;
         public List<SpecialityInfo> SpecialList

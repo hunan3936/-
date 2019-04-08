@@ -17,14 +17,14 @@ namespace Controller
         {
             ReturnValue frv = new ReturnValue();
             #region
-            string outStr = @"<Respnse>
+            string outStr = @"<Response>
                                 <Header>
                                   <SendTime>{0}</SendTime>
                                   <MsgID>{1}</MsgID>
                                   <Code>{2}</Code>
                                   <Desc>{3}</Desc>
                                  </Header>
-                                </Respnse>";
+                                </Response>";
             #endregion
             string MsgID = string.Empty;
             try
@@ -38,6 +38,7 @@ namespace Controller
                 XmlHandle(doc, doctorInfos);
                 //存储数据
                 GetSqlToDataBase(doctorInfos);
+               // GetSqlToDataBaseTest(doctorInfos);
                 frv.isOk = ReturnCode.成功;
             }
             catch (Exception ex)
@@ -58,18 +59,20 @@ namespace Controller
         private void GetSqlToDataBase(List<DoctorInfo> doctorInfos)
         {
             #region
-            string DoctorInfoSql = string.Empty;
-            string SpecialityInfoSql = string.Empty;
+            string DoctorInfoSqlInsert = string.Empty;
+            string SpecialityInfoSqlInsert = string.Empty;
+            string DoctorInfoSqlUpdate = string.Empty;
+            string SpecialityInfoSqlUpdate = string.Empty;
             if (DataAccess.dBType == DBType.OracleDB)
             {
-                DoctorInfoSql = @"insert into  DoctorInfo(
+                DoctorInfoSqlInsert = @"insert into  DoctorInfo(
                        DoctorID,AccessID,OrgID,IDCardNo,DoctorName,Birthday,Sex,Mobile,Phone,Email,
                        Postcode,DoctorType,DoctorTitle,DoctorProfile,Photo,MZ,CensusProvince,
                        CensusCity,CensusCounty,CensusStreet,CensusDetailAddress,CurrentProvince,
                        CurrentCity,CurrentCounty,CurrentStreet,CurrentDetailAddress,MaritalStatus,
                        EducationLevel,School,PoliticalStatus,HealthyStatic,IsSpecialty,MedicalSkill,
                        DataSrc,PYM,WBM,Status,IsValid,CreaterID,CreaterName,CreaterTime,ModifierID,ModifierName,
-                       ModifyTime,DeleterID,DeleterName,DeleterTime,Remarks 
+                       ModifyTime,DeleterID,DeleterName,DeleterTime,Remarks,OrgName,DepName,DepCode,ValidateFlag 
                        ) values(
                        :DoctorID,:AccessID,:OrgID,:IDCardNo,:DoctorName,:Birthday,:Sex,:Mobile,:Phone,:Email,
                        :Postcode,:DoctorType,:DoctorTitle,:DoctorProfile,:Photo,:MZ,:CensusProvince,
@@ -77,20 +80,40 @@ namespace Controller
                        :CurrentCity,:CurrentCounty,:CurrentStreet,:CurrentDetailAddress,:MaritalStatus,
                        :EducationLevel,:School,:PoliticalStatus,:HealthyStatic,:IsSpecialty,:MedicalSkill,
                        :DataSrc,:PYM,:WBM,:Status,:IsValid,:CreaterID,:CreaterName,:CreaterTime,:ModifierID,:ModifierName,
-                       :ModifyTime,:DeleterID,:DeleterName,:DeleterTime,:Remarks 
+                       :ModifyTime,:DeleterID,:DeleterName,:DeleterTime,:Remarks,:OrgName,:DepName,:DepCode,:ValidateFlag 
                        )";
-                SpecialityInfoSql = @"insert into  SpecialityInfo(
+
+                DoctorInfoSqlUpdate = @"update   doctorinfo   set  AccessID=:AccessID,OrgID=:OrgID,IDCardNo=:IDCardNo,
+                       DoctorName=:DoctorName,Birthday=:Birthday,Sex=:Sex,Mobile=:Mobile,Phone=:Phone,Email=:Email,
+                       Postcode=:Postcode,DoctorType=:DoctorType,DoctorTitle=:DoctorTitle,DoctorProfile=:DoctorProfile,
+                       Photo=:Photo,MZ=:MZ,CensusProvince=:CensusProvince,
+                       CensusCity=:CensusCity,CensusCounty=:CensusCounty,CensusStreet=:CensusStreet,
+                       CensusDetailAddress=:CensusDetailAddress,CurrentProvince=:CurrentProvince,
+                       CurrentCity=:CurrentCity,CurrentCounty=:CurrentCounty,CurrentStreet=:CurrentStreet,
+                       CurrentDetailAddress=:CurrentDetailAddress,MaritalStatus=:MaritalStatus,
+                       EducationLevel=:EducationLevel,School=:School,PoliticalStatus=:PoliticalStatus,HealthyStatic=:HealthyStatic,
+                       IsSpecialty=:IsSpecialty,MedicalSkill=:MedicalSkill,
+                       DataSrc=:DataSrc,PYM=:PYM,WBM=:WBM,Status=:Status,IsValid=:IsValid,CreaterID=:CreaterID,
+                       CreaterName=:CreaterName,CreaterTime=:CreaterTime,ModifierID=:ModifierID,ModifierName=:ModifierName,
+                       ModifyTime=:ModifyTime,DeleterID=:DeleterID,DeleterName=:DeleterName,DeleterTime=:DeleterTime,
+                       Remarks=:Remarks,OrgName=:OrgName,DepName=:DepName,DepCode=:DepCode,ValidateFlag=:ValidateFlag 
+                                            where DoctorID=:DoctorID";
+                SpecialityInfoSqlInsert = @"insert into  SpecialityInfo(
                        DoctorID,StudyAddress,StudyStartTime,StudyEndTime,ServiceNum,LearnExperience,PracticalExperience,
                        MedicalSkill,HistoricalRecords
                        ) values(
                        :DoctorID,:StudyAddress,:StudyStartTime,:StudyEndTime,:ServiceNum,:LearnExperience,:PracticalExperience,
                        :MedicalSkill,:HistoricalRecords
                        )";
+                SpecialityInfoSqlUpdate = @"update   SpecialityInfo   set  StudyAddress=:StudyAddress,StudyStartTime=:StudyStartTime,
+                       StudyEndTime=:StudyEndTime,ServiceNum=:ServiceNum,LearnExperience=:LearnExperience,PracticalExperience=:PracticalExperience,
+                       MedicalSkill=:MedicalSkill,HistoricalRecords=:HistoricalRecords
+                      where DoctorID=:DoctorID";
             }
             else
             {
 
-                DoctorInfoSql = @"insert into  DoctorInfo(
+                DoctorInfoSqlInsert = @"insert into  DoctorInfo(
                        DoctorID,AccessID,OrgID,IDCardNo,DoctorName,Birthday,Sex,Mobile,Phone,Email,
                        Postcode,DoctorType,DoctorTitle,DoctorProfile,Photo,MZ,CensusProvince,
                        CensusCity,CensusCounty,CensusStreet,CensusDetailAddress,CurrentProvince,
@@ -107,7 +130,7 @@ namespace Controller
                        @DataSrc,@PYM,@WBM,@Status,@IsValid,@CreaterID,@CreaterName,@CreaterTime,@ModifierID,@ModifierName,
                        @ModifyTime,@DeleterID,@DeleterName,@DeleterTime,@Remarks 
                        )";
-                SpecialityInfoSql = @"insert into  SpecialityInfo(
+                SpecialityInfoSqlInsert = @"insert into  SpecialityInfo(
                        DoctorID,StudyAddress,StudyStartTime,StudyEndTime,ServiceNum,LearnExperience,PracticalExperience,
                        MedicalSkill,HistoricalRecords
                        ) values(
@@ -124,11 +147,17 @@ namespace Controller
                 {
                     foreach (DoctorInfo info in doctorInfos)
                     {
+                        string DoctorInfoSql = string.Empty;
+                        string SpecialityInfoSql = string.Empty;
+                        object objDoc = da.ExecuteScalarTran("select   *   from  DoctorInfo  where DoctorID=:DoctorID", new { DoctorID = info.DoctorID });
+                        DoctorInfoSql = objDoc == null ? DoctorInfoSqlInsert : DoctorInfoSqlUpdate;
                         int ret = da.ExecuteSqlTran(DoctorInfoSql, info);
                         if (ret < 0)
                             throw new Exception();
                         if (info.SpecialList != null && info.SpecialList.Count > 0)
                         {
+                            da.ExecuteSqlTran("delete  SpecialityInfo  where DoctorID=:DoctorID", new { DoctorID = info.DoctorID });
+                            SpecialityInfoSql = SpecialityInfoSqlInsert; 
                             ret = da.ExecuteSqlTran(SpecialityInfoSql, info.SpecialList);
                             if (ret < 0)
                                 throw new Exception();
@@ -200,6 +229,10 @@ namespace Controller
                 doctorInfo.DeleterName = GetXmlString(node.SelectSingleNode("DeleterName"), "【DeleterName】");
                 doctorInfo.DeleterTime = GetXmlDateTime(node.SelectSingleNode("DeleterTime"), "【DeleterTime】");
                 doctorInfo.Remarks = GetXmlString(node.SelectSingleNode("Remarks"), "【Remarks】");
+                doctorInfo.OrgName = GetXmlString(node.SelectSingleNode("OrgName"), "【OrgName】");
+                doctorInfo.DepName = GetXmlString(node.SelectSingleNode("DepName"), "【DepName】");
+                doctorInfo.DepCode = GetXmlString(node.SelectSingleNode("DepCode"), "【DepCode】");
+                doctorInfo.ValidateFlag = GetXmlString(node.SelectSingleNode("ValidateFlag"), "【ValidateFlag】");
                 #endregion
                 XmlNodeListHandle(node.SelectNodes("SpecialityInfo"), doctorInfo);
                 doctorInfos.Add(doctorInfo);
@@ -285,7 +318,6 @@ namespace Controller
             }
             return ret;
         }
-
         /// <summary>
         /// XML节点列表验证
         /// </summary>
@@ -300,6 +332,80 @@ namespace Controller
             if (flag)
                 throw new Exception(msg+"节点不存在，或者没有子节点！");
             return false;
+        }
+
+
+        private string GetSubSring(string str, int length = 4000)
+        {
+            if (str.Length <= length)
+                return str;
+            return str.Substring(0, length);
+        }
+
+
+
+        private void GetSqlToDataBaseTest(List<DoctorInfo> doctorInfos)
+        {
+            #region
+            string DoctorInfoSqlInsert = string.Empty;
+            string SpecialityInfoSqlInsert = string.Empty;
+            string DoctorInfoSqlUpdate = string.Empty;
+            string SpecialityInfoSqlUpdate = string.Empty;
+            if (DataAccess.dBType == DBType.OracleDB)
+            {
+                SpecialityInfoSqlInsert = @"insert into  SpecialityInfo(
+                       DoctorID,StudyAddress,StudyStartTime,StudyEndTime,ServiceNum,LearnExperience,PracticalExperience,
+                       MedicalSkill,HistoricalRecords
+                       ) values(
+                       :DoctorID,:StudyAddress,:StudyStartTime,:StudyEndTime,:ServiceNum,:LearnExperience,:PracticalExperience,
+                       :MedicalSkill,:HistoricalRecords
+                       )";
+                SpecialityInfoSqlInsert = @"insert into  SpecialityInfo(
+                       MedicalSkill
+                       ) values(
+                       :MedicalSkill
+                       )";
+            }
+            #endregion
+
+            DataAccess da = new DataAccess();
+            try
+            {
+                if (da.StratTran())
+                {
+                    foreach (DoctorInfo info in doctorInfos)
+                    {
+
+                        if (info.SpecialList != null && info.SpecialList.Count > 0)
+                        {
+                            string infoStr = info.SpecialList[0].MedicalSkill;
+                            infoStr = infoStr.Length > 4000 ? infoStr.Substring(0, 4000) : infoStr;
+                            int ret = da.ExecuteSqlTran(SpecialityInfoSqlInsert,new { MedicalSkill = infoStr } );   
+                            if (ret < 0)
+                                throw new Exception();
+                        }
+                    }
+                    da.ExecuteSqlTran("", null, true);  //提交事务
+                }
+            }
+            catch (Exception ex)
+            {
+                da.CloseConTran();
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+        public List<DoctorInfo> GetDoctorInfos()
+        {
+            DataAccess da = new DataAccess();
+            List<DoctorInfo> doctorInfos = da.GetListObject<DoctorInfo>("select   *  from   DoctorInfo");
+            foreach (DoctorInfo info in doctorInfos)
+            {
+                List<SpecialityInfo> specialityInfos = da.GetListObject<SpecialityInfo>("select   *  from  SpecialityInfo where DoctorId=:DoctorId", new { DoctorId = info.DoctorID });
+                info.SpecialList = specialityInfos;
+            }
+            return doctorInfos;
         }
     }
 }
